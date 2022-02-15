@@ -98,6 +98,24 @@ view: users {
     type: zipcode
     sql: ${TABLE}.zip ;;
   }
+  dimension: age_tier {
+    type: tier
+    tiers: [1,10,20,30,40,50,60,70,80,90,100]
+    sql: ${age} ;;
+    style: integer
+  }
+  dimension: full_name {
+    type: string
+    sql:CONCAT(CONCAT(${first_name},' '),${last_name}) ;;
+  }
+  dimension: name_length {
+    type: number
+    sql: LENGTH(${full_name}) ;;
+  }
+  measure: average {
+    type: average
+    sql: ${age} ;;
+  }
 
   measure: count {
     type: count
